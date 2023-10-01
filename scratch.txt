@@ -1,0 +1,6 @@
+npm install
+npm start
+
+when creating MongoDB Atlas add ip address as 0.0.0.0/0 for all ips
+
+change the tap header and icon
