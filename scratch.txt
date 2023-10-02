@@ -1,6 +1,8 @@
 npm install
 npm start
 
+if u put nodemon app.js in script in mode_modules, it will work on macos but not on heroku
+
 when creating MongoDB Atlas add ip address as 0.0.0.0/0 for all ips
 
 to deploy to heroku:
