@@ -4,7 +4,24 @@ npm start
 when creating MongoDB Atlas add ip address as 0.0.0.0/0 for all ips
 
 to deploy to heroku:
+brew tap heroku/brew && brew install heroku
+heroku login
+node --version
+npm --version
+git --version
+go into main project folder
+heroku create
+
 git push heroku main
+app shouldnt work, need to set env variables, go to settings and config vars
+restart dynos on heroku website 
+can view logs on heroku website or heroku logs --tail
+heroku ps:scale web=1
+heroku open
+
+to rename heroku app: (website issue is need to change git remote)
+https://devcenter.heroku.com/articles/renaming-apps#updating-git-remotes
+heroku apps:rename sharps
 
 write a Readme.md for a project called Sharps.
 
