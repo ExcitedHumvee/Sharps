@@ -3,4 +3,13 @@ npm start
 
 when creating MongoDB Atlas add ip address as 0.0.0.0/0 for all ips
 
-change the tap header and icon
+to deploy to heroku:
+
+
+write a Readme.md for a project called Sharps.
+
+Sharps is like an image sharing website, kind of like an instagram clone. You can login using your email address, browse images which are called Sharps, upload, edit or delete your own Sharps, comment on others' sharps and even leave a rating on their sharp.
+
+it is a web application developed mainly with NodeJS as the backend and front end is made with the help of bootstrap and is embeded in the node app. Other technologies used here are MongoDB and Mongoose for the database, ExpressJS for routing, PassportJS for user authentication, Cloudinary for image uploading, MapBox for maps related apis.
+
+To start the application: create the MongoDB database, Cloudinary account, MapBox account and load the recquired tokens inside the .env file. Then run npm install and npm start to start the application.
