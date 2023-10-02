@@ -17,9 +17,11 @@ heroku create
 git push heroku main
 app shouldnt work, need to set env variables, go to settings and config vars
 restart dynos on heroku website 
+heroku restart
 can view logs on heroku website or heroku logs --tail
 heroku ps:scale web=1
 heroku open
+
 
 to rename heroku app: (website issue is need to change git remote)
 https://devcenter.heroku.com/articles/renaming-apps#updating-git-remotes
@@ -32,3 +34,5 @@ Sharps is like an image sharing website, kind of like an instagram clone. You ca
 it is a web application developed mainly with NodeJS as the backend and front end is made with the help of bootstrap and is embeded in the node app. Other technologies used here are MongoDB and Mongoose for the database, ExpressJS for routing, PassportJS for user authentication, Cloudinary for image uploading, MapBox for maps related apis.
 
 To start the application: create the MongoDB database, Cloudinary account, MapBox account and load the recquired tokens inside the .env file. Then run npm install and npm start to start the application.
+
+This application is already deployed on Heroku and can be accessed from: https://sharps-ff747e1870b7.herokuapp.com/
