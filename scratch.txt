@@ -21,7 +21,7 @@ git --version
 go into main project folder
 heroku create
 
-git push heroku main
+git push heroku main; heroku logs --tail
 app shouldnt work, need to set env variables, go to settings and config vars
 restart dynos on heroku website 
 heroku restart
