@@ -4,7 +4,7 @@ npm start
 when creating MongoDB Atlas add ip address as 0.0.0.0/0 for all ips
 
 to deploy to heroku:
-
+git push heroku main
 
 write a Readme.md for a project called Sharps.
 
