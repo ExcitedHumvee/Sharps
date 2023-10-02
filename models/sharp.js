@@ -16,7 +16,7 @@ ImageSchema.virtual('thumbnail').get(function () {
 
 const opts = { toJSON: { virtuals: true } };
 
-const CampgroundSchema = new Schema({
+const SharpSchema = new Schema({
     title: String,
     images: [ImageSchema],
     geometry: {
@@ -46,15 +46,15 @@ const CampgroundSchema = new Schema({
 }, opts);
 
 
-CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
+SharpSchema.virtual('properties.popUpMarkup').get(function () {
     return `
-    <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>
+    <strong><a href="/sharps/${this._id}">${this.title}</a><strong>
     <p>${this.description.substring(0, 20)}...</p>`
 });
 
 
 
-CampgroundSchema.post('findOneAndDelete', async function (doc) {
+SharpSchema.post('findOneAndDelete', async function (doc) {
     if (doc) {
         await Review.deleteMany({
             _id: {
@@ -64,4 +64,4 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
     }
 })
 
-module.exports = mongoose.model('Campground', CampgroundSchema);
+module.exports = mongoose.model('Sharp', SharpSchema);
