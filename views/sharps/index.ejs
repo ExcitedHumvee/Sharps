@@ -1,14 +1,14 @@
 <% layout('layouts/boilerplate')%>
 <div id="cluster-map"></div>
 <div class="container">
-    <h1>All Campgrounds</h1>
+    <h1>All Sharps</h1>
 
-    <% for (let campground of campgrounds){%>
+    <% for (let sharp of sharps){%>
     <div class="card mb-3">
         <div class="row">
             <div class="col-md-4">
-                <%if(campground.images.length) {%>
-                <img class="img-fluid" alt="" src="<%=campground.images[0].url%>">
+                <%if(sharp.images.length) {%>
+                <img class="img-fluid" alt="" src="<%=sharp.images[0].url%>">
                 <% }else {%>
                 <img class="img-fluid" alt=""
                     src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png">
@@ -16,13 +16,13 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title"><%= campground.title %> </h5>
+                    <h5 class="card-title"><%= sharp.title %> </h5>
 
-                    <p class="card-text"><%= campground.description %></p>
+                    <p class="card-text"><%= sharp.description %></p>
                     <p class="card-text">
-                        <small class="text-muted"><%= campground.location%></small>
+                        <small class="text-muted"><%= sharp.location%></small>
                     </p>
-                    <a class="btn btn-primary" href="/campgrounds/<%=campground._id%>">View <%=campground.title%></a>
+                    <a class="btn btn-primary" href="/sharps/<%=sharp._id%>">View <%=sharp.title%></a>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
 </div>
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-    const campgrounds = { features: <%- JSON.stringify(campgrounds) %>}
+    const sharps = { features: <%- JSON.stringify(sharps) %>}
 </script>
 
 <script src="/javascripts/clusterMap.js"></script>

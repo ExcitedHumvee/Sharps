@@ -16,12 +16,12 @@ const User = require('./models/user');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
-const campgroundRoutes = require('./routes/campgrounds');
+const sharpRoutes = require('./routes/sharps');
 const reviewRoutes = require('./routes/reviews');
 
 const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/sharp';
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -132,7 +132,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    res.locals.APP_NAME=process.env.APP_NAME;
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
@@ -141,8 +140,8 @@ app.use((req, res, next) => {
 
 
 app.use('/', userRoutes);
-app.use('/campgrounds', campgroundRoutes)
-app.use('/campgrounds/:id/reviews', reviewRoutes)
+app.use('/sharps', sharpRoutes)
+app.use('/sharps/:id/reviews', reviewRoutes)
 
 
 app.get('/', (req, res) => {
