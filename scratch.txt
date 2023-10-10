@@ -13,6 +13,7 @@ MONGODB ATLAS NOTES
 when creating MongoDB Atlas add ip address as 0.0.0.0/0 for all ips
 
 TO DEPLOY TO HEROKU:
+NOTE: dyno is turned off to save cost: https://dashboard.heroku.com/apps/sharps/resources
 brew tap heroku/brew && brew install heroku
 heroku login
 node --version
