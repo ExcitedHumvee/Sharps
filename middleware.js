@@ -14,7 +14,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 module.exports.validateSharp = (req, res, next) => {
     const { error } = sharpSchema.validate(req.body);
-    console.log(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)

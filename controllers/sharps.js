@@ -24,7 +24,6 @@ module.exports.createSharp = async (req, res, next) => {
     sharp.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     sharp.author = req.user._id;
     await sharp.save();
-    console.log(sharp);
     req.flash('success', 'Successfully made a new sharp!');
     res.redirect(`/sharps/${sharp._id}`)
 }
@@ -55,7 +54,6 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateSharp = async (req, res) => {
     const { id } = req.params;
-    console.log(req.body);
     const sharp = await Sharp.findByIdAndUpdate(id, { ...req.body.sharp });
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     sharp.images.push(...imgs);

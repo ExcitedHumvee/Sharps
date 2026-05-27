@@ -15,6 +15,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
+const rateLimit = require('express-rate-limit');
 const userRoutes = require('./routes/users');
 const sharpRoutes = require('./routes/sharps');
 const reviewRoutes = require('./routes/reviews');
@@ -60,15 +61,17 @@ store.on("error", function (e) {
     console.log("SESSION STORE ERROR", e)
 })
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const sessionConfig = {
     store,
     name: 'session',
     secret,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         httpOnly: true,
-        // secure: true,
+        secure: isProduction,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -138,8 +141,23 @@ app.use((req, res, next) => {
     next();
 })
 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+app.use(limiter);
 
-app.use('/', userRoutes);
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: 'Too many requests, please try again later.',
+});
+
+app.use('/', authLimiter, userRoutes);
 app.use('/sharps', sharpRoutes)
 app.use('/sharps/:id/reviews', reviewRoutes)
 
@@ -156,7 +174,10 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-    res.status(statusCode).render('error', { err })
+    const error = isProduction
+        ? { statusCode, message: err.message }
+        : err;
+    res.status(statusCode).render('error', { err: error })
 })
 
 const port = process.env.PORT || 3000;
