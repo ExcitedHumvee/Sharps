@@ -6,84 +6,110 @@ Sharps is a web application that allows users to share, upload, edit, and delete
 
 ## Features
 
-### MongoDB Integration and CRUD Operations
+- **CRUD Operations** for Sharps and Reviews (Create, Read, Update, Delete)
+- **User Authentication** via PassportJS (register, login, logout)
+- **Image Upload** via Multer + Cloudinary
+- **Interactive Maps** via MapBox (cluster map on index, individual location maps)
+- **Input Validation** via Joi with HTML sanitization
+- **Security** — Helmet CSP, rate limiting, mongo sanitization, session hardening
 
--   **Database Storage:** MongoDB is integrated to store Sharps and Reviews data efficiently.
--   **Mongoose Connection:** Mongoose is used to establish a connection between NodeJS and MongoDB Atlas, ensuring seamless communication.
+## Tech Stack
 
-### CRUD Operations for Sharps and Reviews
-
--   **Create:** Users can upload new Sharps and leave reviews.
--   **Read:** Browse through a collection of Sharps, view detailed information, and read reviews.
--   **Update:** Edit or modify your uploaded Sharps and reviews.
--   **Delete:** Users have the ability to remove their Sharps and associated reviews.
-
-### PassportJS for User Authentication
-
--   **Secure Access:** PassportJS is employed for user authentication, ensuring secure login using email addresses.
-
-### ExpressJS RESTful Routing
-
--   **Structured Routing:** ExpressJS is utilized for creating RESTful routes, providing a well-organized and efficient structure to the application.
-
-### Cloudinary for Image Storage
-
--   **External Image Storage:** Cloudinary is employed to store images on a third-party platform, offering a scalable and reliable solution for image storage.
-
-### MapBox APIs for Geographic Representation
-
--   **Location Mapping:** MapBox APIs are integrated to display the geographic location where a Sharp was taken.
--   **Worldwide Cluster Map:** The index page features a map showcasing all Sharps taken globally, with clustering for a visually appealing and efficient display.
+| Layer | Technology |
+|-------|-----------|
+| Runtime | Node.js |
+| Framework | Express.js |
+| Database | MongoDB (Mongoose ODM) |
+| Templating | EJS + ejs-mate |
+| Auth | Passport + passport-local-mongoose |
+| Image Storage | Cloudinary |
+| Maps | MapBox GL JS |
+| Validation | Joi + sanitize-html |
 
 ## Getting Started
 
-1.  **Clone the Repository:**
-    
-    bashCopy code
-    
-    `git clone https://github.com/yourusername/sharps.git
-    cd sharps` 
-    
-2.  **Set Up Environment Variables:** Create a `.env` file in the root directory and add the following variables:
-    
-    makefileCopy code
-    
-    `MONGODB_URI=your_mongodb_uri
-    CLOUDINARY_API_KEY=your_cloudinary_api_key
-    CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-    MAPBOX_API_TOKEN=your_mapbox_api_token` 
-    
-3.  **Install Dependencies:**
-    
-    bashCopy code
-    
-    `npm install` 
-    
-4.  **Start the Application:**
-    
-    bashCopy code
-    
-    `npm start` 
-    
-5.  **Access the Application:** Open your web browser and go to [http://localhost:3000](http://localhost:3000/)
-    
+### Prerequisites
 
-## Deployment
+- **Node.js** 18+
+- **MongoDB** running locally on port 27017
 
-The application is already deployed on Heroku and can be accessed [here](https://sharps-ff747e1870b7.herokuapp.com/).
+### Setup
 
-## Contributing
+```bash
+git clone https://github.com/ExcitedHumvee/Sharps.git
+cd sharps
+npm install
+```
 
-Feel free to contribute to the development of Sharps by creating issues or submitting pull requests. Please follow the [contribution guidelines](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors).
+### Environment Variables
+
+Copy the example file and fill in your credentials:
+
+```bash
+cp .env.example .env
+```
+
+Required variables in `.env`:
+
+```
+PORT=3000
+DB_URL=mongodb://localhost:27017/sharp
+MAPBOX_TOKEN=your_mapbox_token
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_KEY=your_cloudinary_key
+CLOUDINARY_SECRET=your_cloudinary_secret
+SECRET=your_session_secret
+```
+
+### Seed Data
+
+```bash
+node seeds/index.js
+```
+
+This creates 3 test users and 300 sharps with reviews.
+
+| Username | Password |
+|----------|----------|
+| `demo` | `password123` |
+| `alice` | `password123` |
+| `bob` | `password123` |
+
+### Run
+
+```bash
+npm start        # Start the server
+npm run dev      # Start with nodemon (auto-reload)
+npm test         # Run the API test suite
+```
+
+Open [http://localhost:3000](http://localhost:3000/).
+
+## API Test Suite
+
+The test script (`test/api.test.js`) starts the server, then runs through all endpoints:
+
+- Public pages (home, login, register)
+- Registration and session handling
+- Auth protection (redirect for unauthenticated users)
+- Sharps CRUD (list, view, create review)
+- Logout flow
+- Error handling (404, invalid IDs)
+- Rate limiting headers
+- Security headers (CSP, X-Content-Type-Options)
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start the server |
+| `npm run dev` | Start with nodemon for development |
+| `npm test` | Run the API test suite |
 
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/license/mit/).
+MIT License
 
 ## Contact
 
-For any inquiries, please contact Stany Desa at [stanydesa@live.com](mailto:stanydesa@live.com).
-
-----------
-
-**Happy Sharpening! 📸**
+Stany Desa — [stanydesa@live.com](mailto:stanydesa@live.com)
